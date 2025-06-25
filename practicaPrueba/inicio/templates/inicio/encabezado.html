@@ -1,17 +1,17 @@
-{%load static%}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-<title>{% block titulo %}{% endblock %}</title>
+<title>{% block titulo %}ejemplo {% endblock %}</title>
 
-<link href="{% static 'inicio/css/bootstrap.min.css'%}" rel="stylesheet" type="text/css">
-<link href="{% static 'inicio/css/londinium-theme.css'%}" rel="stylesheet" type="text/css">
-<link href="{% static 'inicio/css/styles.css'%}" rel="stylesheet" type="text/css">
-<link href="{% static 'inicio/css/icons.css'%}" rel="stylesheet" type="text/css">
+{% load static %}
+
+<link href="{% static 'inicio/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'inicio/css/londinium-theme.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'inicio/css/styles.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'inicio/css/icons.css' %}" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -49,64 +49,68 @@
 <script type="text/javascript" src="js/application.js"></script>
 
 </head>
+
 <body>
+
+	
+
  	<div class="page-container">
 		<!-- Barra de menú -->
+
+		<!-- Imagen de Usuario -->
 		<div class="sidebar">
 
+					<div class="user-menu dropdown">
+						<a href="#">
+							<img src="{%block imagen%}{%endblock%}">
+							<div class="user-info">
+								
+							{% block titulo_principal %}Principal <span>DSM</span>{% endblock %}
+							</div>
+							
+						</a>
+					</div>
+					
 
 			<!-- Imagen de Usuario -->
-		<div class="user-menu dropdown">
-			<a href="#">
-				<img src="{%block imagen%}{% endblock %}">
-				<div class="user-info">
-					{% block descripcion %}Principal <span>DSM</span>{% endblock %}
-				</div>
-			</a>
-		</div>
-		<!-- Imagen de Usuario -->
-
-
 			<div class="sidebar-content">
 				<!-- Menú de navegación -->
 				<ul class="navigation">
-							<li><a href="{%url 'Principal'%}">Principal</a></li>
-							<li><a href="{%url 'Formulario'%}">Registro</a></li>
-                            <li><a href="{%url 'Contacto'%}">Contacto</a></li>
-
+					 <li><a href="{% url 'Principal'%}">Home</a></li> 
+                     <li><a href="{% url 'Formulario'%}">Registrar</a> </li>
+                     <li><a href="{% url 'Contacto'%}">Contactanos</a> </li>
+	
 				</ul>
 				<!-- /Fin menú -->
 			</div>
 		</div>
 		<!-- /sidebar -->
 
-		 <!-- Contenido Principal-->
-	 	<div class="page-content">
-				</div>
-			<!-- /Encabezado-->
 
-
-				
-
+	<div class="breadcrumb-line">
+		<ul class="breadcrumb">
+			<a href="{%url 'Principal'%}">
+				{%if request.path == '/' %}
+					Principal
+				{%else%}
+					Principal{{request.path}}
+				{%endif%}
+			</a>
+		
+		</ul>
 	</div>
-	{% block contenido %} 
-    <!-- BLOCKS -->
-    {% endblock %}
-	
-</div>
 
-	{% block barra_inferior %}
-    <div class="breadcrumb-line">
-        <ul class="breadcrumb">
-            <a href="{% url 'Principal' %}">
-            {% if request.path == '/' %}
-                Principal
-            {% else %}
-                Principal{{request.path}}
-            {% endif %}
-            </a>
-        </ul>  
-    </div>
+
+		<div class="page-content">
+	{% block contenido %}
+
+    
     {% endblock %}
+
+	
+	
+	</div>
+		
+	</div>
 </body>
 </html>

@@ -18,13 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from inicio import views
 from django.conf import settings
+from registros import views as views_registros
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.Principal, name='Principal'),
+    path('',views_registros.registros, name='Principal'),
     path('contacto/', views.Contacto, name='Contacto'),
     path('formulario/', views.Formulario, name='Formulario'),
-    path('ejemplo/', views.Ejemplo, name='Ejemplo')
+    path('ejemplo/', views.Ejemplo, name='Ejemplo'),
+    
 ]
 
 
