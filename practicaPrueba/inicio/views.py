@@ -23,3 +23,10 @@ def Formulario(request):
 
 def Ejemplo(request):
     return render(request, "inicio/ejemplo.html")
+
+
+
+
+def seguridad(request):
+    nombre = request.GET.get('nombre')
+    return render(request, "inicio/seguridad.html", {'nombre': nombre})

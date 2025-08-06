@@ -1,0 +1,64 @@
+{% extends "inicio/encabezado.html" %}
+
+{% block titulo %} CONTACTO {% endblock %}
+
+{% block imagen%}
+	{%load static%}
+	{%static 'inicio/images/lupa.png'%}
+{% endblock%}
+{% block titulo_principal %}Consultar Comentario <span>DSM</span>{% endblock %}
+
+{% block contenido%} 
+<!--Encabezdo -->
+			<div class="page-header">
+				<div class="page-title">
+					<h3>COMENTARIOS
+				    <small>Lista de Comentarios </small></h3>
+				</div>
+			</div>
+
+			{% block url %}
+
+<div class="breadcrumb-line">
+		<ul class="breadcrumb">
+			<a href="{%url 'Principal'%}">
+				{%if request.path == '/' %}
+					Principal
+				{%else%}
+					Principal{{request.path}}
+				{%endif%}
+			</a>
+		</ul>
+	</div>
+{% endblock %}
+
+
+<!-- Tabla de Comentarios -->
+<div class="panel panel-default">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Usuario</th>
+                    <th class="text-center">Mensaje</th>
+                    <th class="text-center"></th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comentario in comentarios %}
+                <tr>
+                    <td class="text-center">{{ comentario.usuario }}</td>
+                    <td class="text-center">{{ comentario.mensaje }}</td>
+                    <td class="text-center">Editar</td>
+                    <td class="text-center">
+                    <a href="{%url 'Eliminar' comentario.id%}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- /Tabla de Comentarios -->
+{% endblock %}
